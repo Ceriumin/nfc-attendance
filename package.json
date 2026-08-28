@@ -8,7 +8,8 @@
     "typecheck": "tsc",
     "start": "tsx src/server.ts",
     "migrate": "tsx src/database/migrate.ts",
-    "seed:students": "tsx src/database/seeds/student.seed.ts"
+    "seed:students": "tsx src/database/seeds/student.seed.ts",
+    "seed:attendance": "tsx src/database/seeds/attendance.seed.ts"
   },
   "keywords": [],
   "author": "",

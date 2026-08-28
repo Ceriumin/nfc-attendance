@@ -38,10 +38,17 @@ async function runMigrations(fileName: string) {
 
     const connection = await db.getConnection();
 
+    const statements = sql
+        .split(";")
+        .map((statement) => statement.trim())
+        .filter((statement) => statement.length > 0);
+
     try {
         await connection.beginTransaction();
 
-        await connection.query(sql);
+        for (const statement of statements) {
+            await connection.query(statement);
+        }
 
         await connection.query(
             "INSERT INTO migrations (name) VALUES (?)",
