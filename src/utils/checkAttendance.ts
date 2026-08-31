@@ -1,4 +1,4 @@
-const GRACE_PERIOD_SECONDS = Number(process.env.GRACE_PERIOD ?? 0);
+const GRACE_PERIOD_SECONDS = Number(process.env.GRACE_PERIOD ?? 900);
 
 const timeToSeconds = (timeStr: string): number => {
     const [h, m, s] = timeStr.split(':');
