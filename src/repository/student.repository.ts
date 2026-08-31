@@ -1,8 +1,6 @@
 import { db } from "@/database/connection.ts";
-import type { RowDataPacket, ResultSetHeader } from "mysql2";
-import type { Student, StudentInput } from "@/types/student.ts";
-
-type StudentRow = Student & RowDataPacket;
+import type { ResultSetHeader } from "mysql2";
+import type { Student, StudentInput, StudentRow } from "@/types/student.ts";
 
 export async function getStudentById(id: number): Promise<Student | null> {
     const [rows] = await db.query<StudentRow[]>(

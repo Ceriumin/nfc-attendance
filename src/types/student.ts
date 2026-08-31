@@ -1,3 +1,5 @@
+import type { RowDataPacket } from "mysql2";
+
 export interface Student {
     id: number;
     first_name: string;
@@ -14,3 +16,7 @@ export interface StudentInput {
     email: string;
     course: string;
 }
+
+/* ————————— Database Row Types ————————— */
+
+export type StudentRow = Student & RowDataPacket;
