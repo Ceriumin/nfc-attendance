@@ -40,5 +40,7 @@
     "paths": {
       "@/*": ["./src/*"]
     }
-  }
+  },
+  // Tests live beside src/ and are run by Vitest, not compiled by tsc.
+  "exclude": ["tests"]
 }
