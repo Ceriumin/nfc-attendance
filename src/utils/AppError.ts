@@ -17,6 +17,20 @@ export class ValidationError extends AppError {
     }
 }
 
+/** 401 — the request is not authenticated (bad credentials or missing/invalid token). */
+export class UnauthorizedError extends AppError {
+    constructor(message = "Not authenticated") {
+        super(401, message);
+    }
+}
+
+/** 403 — the request is authenticated but lacks permission for this resource. */
+export class ForbiddenError extends AppError {
+    constructor(message = "Insufficient permissions") {
+        super(403, message);
+    }
+}
+
 /** 404 — the requested resource does not exist. */
 export class NotFoundError extends AppError {
     constructor(message = "Resource not found") {

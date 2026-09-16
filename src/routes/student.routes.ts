@@ -1,18 +1,24 @@
 import * as studentController from '@/controllers/student.controller.ts';
+import { requireRole } from '@/middleware/auth.ts';
+import { requireOwnStudentParam } from '@/middleware/ownership.ts';
 import { Router } from 'express';
 
 const studentRouter = Router();
 
-studentRouter.get('/', studentController.getAllStudents);
+/* ————————— Read ————————— */
 
-studentRouter.get('/:id', studentController.getStudentById);
+// Listing every student is staff-only; students can't enumerate the roster.
+studentRouter.get('/', requireRole('teacher', 'admin'), studentController.getAllStudents);
+
+// A student may fetch only their own record; teachers/admins may fetch any.
+studentRouter.get('/:id', requireOwnStudentParam('id'), studentController.getStudentById);
 
 /* ————————— Administrative Endpoints ————————— */
 
-studentRouter.post('/', studentController.createStudent);
+studentRouter.post('/', requireRole('admin'), studentController.createStudent);
 
-studentRouter.put('/:id', studentController.updateStudent);
+studentRouter.put('/:id', requireRole('admin'), studentController.updateStudent);
 
-studentRouter.delete('/:id', studentController.deleteStudent);
+studentRouter.delete('/:id', requireRole('admin'), studentController.deleteStudent);
 
 export default studentRouter;
